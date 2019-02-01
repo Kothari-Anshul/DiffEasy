@@ -1,29 +1,28 @@
-import React from "react";
-var Input =  (props) => {
+import React from 'react';
+
+const Input = (props) => {
+	const { floatRight, highlightedText, handleChange } = props;
 	const textareaStyle = {
-		height:"350px",
-		width:"49%",
-		float:props.floatRight?"right":"left",
-		padding:"5px",
-		resize:"none",
-		overflowY: "scroll",
-		textAlign:"left"
+		height: '350px',
+		width: '49%',
+		float: floatRight ? 'right' : 'left',
+		padding: '5px',
+		resize: 'none',
+		overflowY: 'scroll',
+		textAlign: 'left',
 	};
-	if(props.highlightedText === ""){
+	if (highlightedText === '') {
 		return (
-			<textarea 
-				defaultValue={props.originalText} 
-				style={textareaStyle} 
-				onChange = {(event) => props.handleChange(event,props.floatRight?"originalTextRight":"originalTextLeft")} 
-				placeholder = "Please enter some text!">
-			</textarea>
-		);
-		
-	}else{
-		return (
-			<div style={textareaStyle} dangerouslySetInnerHTML={{__html:props.highlightedText}}>
-			</div>
+			<textarea
+				defaultValue={props.originalText}
+				style={textareaStyle}
+				onChange={event => handleChange(event, floatRight ? 'originalTextRight' : 'originalTextLeft')}
+				placeholder="Please enter some text!"
+			/>
 		);
 	}
+	return (
+		<div style={textareaStyle} dangerouslySetInnerHTML={{ __html: highlightedText }} />
+	);
 };
 export default Input;
