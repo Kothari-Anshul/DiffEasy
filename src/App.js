@@ -30,20 +30,12 @@ class App extends Component {
 		let textLeft = '';
 		let textRight = '';
 		let lineIndex;
-		for (
-			lineIndex = 0;
-			lineIndex < Math.min(bagOfLinesLeft.length, bagOfLinesRight.length);
-			lineIndex++
-		) {
+		for (lineIndex = 0; lineIndex < Math.min(bagOfLinesLeft.length, bagOfLinesRight.length); lineIndex++) {
 			const bagOfWords1 = bagOfLinesLeft[lineIndex].split(' ');
 			const bagOfWords2 = bagOfLinesRight[lineIndex].split(' ');
 			let isSpanOpen = false;
 			let wordIndex;
-			for (
-				wordIndex = 0;
-				wordIndex < Math.min(bagOfWords1.length, bagOfWords2.length);
-				wordIndex++
-			) {
+			for (wordIndex = 0; wordIndex < Math.min(bagOfWords1.length, bagOfWords2.length); wordIndex++) {
 				if (bagOfWords1[wordIndex] !== bagOfWords2[wordIndex]) {
 					if (!isSpanOpen) {
 						textLeft = `${textLeft} <span class="Highlight">`;
@@ -83,17 +75,11 @@ class App extends Component {
 			textRight += '<br/>';
 		}
 		while (lineIndex < bagOfLinesLeft.length) {
-			textLeft = `${textLeft
-				}<span class="Highlight">${
-				bagOfLinesLeft[lineIndex]
-				}</span><br/>`;
+			textLeft = `${textLeft}<span class="Highlight">${bagOfLinesLeft[lineIndex]}</span><br/>`;
 			lineIndex++;
 		}
 		while (lineIndex < bagOfLinesRight.length) {
-			textRight = `${textRight
-				}<span class="Highlight">${
-				bagOfLinesRight[lineIndex]
-				}</span><br/>`;
+			textRight = `${textRight}<span class="Highlight">${bagOfLinesRight[lineIndex]}</span><br/>`;
 			lineIndex++;
 		}
 
@@ -110,10 +96,7 @@ class App extends Component {
 
 	handleGetDifference = () => {
 		const { originalTextLeft, originalTextRight } = this.setState;
-		if (
-			originalTextLeft !== ''
-			&& originalTextRight !== ''
-		) {
+		if (originalTextLeft !== '' && originalTextRight !== '') {
 			this.setState({ isEditable: false });
 		}
 	};
@@ -122,25 +105,15 @@ class App extends Component {
 		const { isEditable, originalTextLeft, originalTextRight } = this.state;
 		const { highlightedTextLeft, highlightedTextRight } = isEditable
 			? {
-				highlightedTextLeft: '',
-				highlightedTextRight: ''
-			}
+					highlightedTextLeft: '',
+					highlightedTextRight: '',
+			  }
 			: this.getHighlightedText();
 		return (
 			<div className="App" style={{ padding: '10px', overflow: 'auto' }}>
 				<h1>DIFFERENCE MADE EASY!</h1>
-				<Input
-					highlightedText={highlightedTextLeft}
-					originalText={originalTextLeft}
-					handleChange={this.handleChange}
-					floatRight={false}
-				/>
-				<Input
-					highlightedText={highlightedTextRight}
-					originalText={originalTextRight}
-					handleChange={this.handleChange}
-					floatRight
-				/>
+				<Input highlightedText={highlightedTextLeft} originalText={originalTextLeft} handleChange={this.handleChange} floatRight={false} />
+				<Input highlightedText={highlightedTextRight} originalText={originalTextRight} handleChange={this.handleChange} floatRight />
 				{isEditable && (
 					<button type="button" onClick={this.handleGetDifference}>
 						Get Difference
