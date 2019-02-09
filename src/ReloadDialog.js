@@ -12,15 +12,19 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 const ReloadDialog = props => {
 	const { open, handleChange } = props;
-	const listItems = Object.keys(window.localStorage).map(key => {
-		const data = JSON.parse(window.localStorage.getItem(key));
+	if (!('savedDiff' in localStorage)) {
+		localStorage.setItem('savedDiff', JSON.stringify({}));
+	}
+	const existingDiff = JSON.parse(localStorage.getItem('savedDiff'));
+	const listItems = Object.keys(existingDiff).map(key => {
 		return (
 			<ListItem divider key={key}>
-				<ListItemText primary={JSON.parse(window.localStorage[key]).title} secondary={new Date(key).toDateString()} />
+				<ListItemText primary={existingDiff[key].title} secondary={new Date(key).toDateString()} />
 				<ListItemSecondaryAction>
 					<IconButton
 						onClick={() => {
-							delete window.localStorage[key];
+							delete existingDiff[key];
+							localStorage.setItem('savedDiff', JSON.stringify(existingDiff));
 							handleChange('isReloadDialogOpen', false);
 						}}
 					>
@@ -28,8 +32,8 @@ const ReloadDialog = props => {
 					</IconButton>
 					<IconButton
 						onClick={() => {
-							handleChange('originalTextLeft', data.originalTextLeft);
-							handleChange('originalTextRight', data.originalTextRight);
+							handleChange('originalTextLeft', existingDiff[key].originalTextLeft);
+							handleChange('originalTextRight', existingDiff[key].originalTextRight);
 							handleChange('isReloadDialogOpen', false);
 						}}
 					>

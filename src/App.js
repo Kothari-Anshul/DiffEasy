@@ -123,8 +123,15 @@ class App extends Component {
 			title,
 		};
 		this.handleChange('isTitleDialogOpen', false);
+		const date = Date();
 		// Use localstorage to save the text temporarily!
-		window.localStorage.setItem(Date(), JSON.stringify(data));
+		if ('savedDiff' in localStorage) {
+			const existingDiff = JSON.parse(localStorage.getItem('savedDiff'));
+			existingDiff[date] = data;
+			localStorage.setItem('savedDiff', JSON.stringify(existingDiff));
+		} else {
+			localStorage.setItem('savedDiff', JSON.stringify({ date: data }));
+		}
 	};
 
 	render() {
