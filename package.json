@@ -1,12 +1,27 @@
 {
-  "name": "project",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-scripts": "2.1.3"
+	"name": "DiffEasy",
+  "description": "Simple & Intuitive tool to get quick difference between texts on word level.",
+   "author": {
+    "name": "Anshul Kothari",
+    "url": "https://github.com/Kothari-Anshul"
   },
+  "contributors": [
+    {
+      "name": "Yash Joshi",
+      "url": "https://github.com/jyash97"
+    },
+  ],
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@material-ui/core": "^3.9.2",
+		"@material-ui/icons": "^3.0.2",
+		"material-ui-color-picker": "^3.2.0",
+		"prop-types": "^15.6.2",
+		"react": "^16.7.0",
+		"react-dom": "^16.7.0",
+		"react-scripts": "2.1.3"
+	},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
