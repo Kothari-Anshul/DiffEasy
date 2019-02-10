@@ -43,8 +43,9 @@ const Settings = props => {
 						<Switch checked={isCaseSensitive} onChange={() => handleChange('isCaseSensitive', !isCaseSensitive)} />
 					</ListItemSecondaryAction>
 				</ListItem>
-				<ListItem>
-					<ListItemText primary="Highlight Color" secondary={colorPicker} />
+				<ListItem style={{ flexDirection: 'column' }} alignItems="flex-start">
+					<ListItemText primary="Highlight Color" />
+					{colorPicker}
 				</ListItem>
 			</List>
 		</div>

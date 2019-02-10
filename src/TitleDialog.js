@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 const TitleDialog = props => {
 	const { open, handleChange, handleSave } = props;
 	return (
-		<Dialog open={open} onClose={() => handleChange('isTitleDialogOpen', false)}>
+		<Dialog open={open} onClose={() => handleChange('isTitleDialogOpen', false)} maxWidth="sm" fullWidth>
 			<DialogTitle>Give suitable Title!</DialogTitle>
 			<DialogContent>
 				<TextField autoFocus margin="dense" fullWidth onChange={event => handleChange('title', event.target.value)} />
