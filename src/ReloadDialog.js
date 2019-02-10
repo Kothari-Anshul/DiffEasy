@@ -44,7 +44,7 @@ const ReloadDialog = props => {
 		);
 	});
 	return (
-		<Dialog open={open} onClose={() => handleChange('isReloadDialogOpen', false)} scroll="paper">
+		<Dialog open={open} maxWidth="sm" fullWidth onClose={() => handleChange('isReloadDialogOpen', false)} scroll="paper">
 			<DialogTitle>Your Saved Differences!</DialogTitle>
 			<DialogContent>
 				<List>
