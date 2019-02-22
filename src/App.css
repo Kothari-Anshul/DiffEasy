@@ -45,3 +45,6 @@
 .numbers {
 	color: #999;
 }
+.noOutline {
+	white-space: nowrap;
+}
