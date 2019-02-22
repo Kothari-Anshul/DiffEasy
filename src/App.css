@@ -1,5 +1,6 @@
 .App {
 	text-align: center;
+	background-color: #ededed;
 }
 .Highlight {
 	background-color: greenyellow;
@@ -31,4 +32,16 @@
 	to {
 		transform: rotate(360deg);
 	}
+}
+[contentEditable='true']:empty:not(:focus):before {
+	content: attr(placeholder);
+}
+.noOutline:focus {
+	outline: none;
+}
+.minHeight {
+	min-height: 62vh;
+}
+.numbers {
+	color: #999;
 }

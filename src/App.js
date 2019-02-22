@@ -3,11 +3,7 @@ import './App.css';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { split as SplitEditor } from 'react-ace';
-
-import 'brace/mode/javascript';
-import 'brace/theme/github';
-
+import Editor from './Editor';
 import Header from './Header';
 import Settings from './Settings';
 import Footer from './Footer';
@@ -17,7 +13,7 @@ import ReloadDialog from './ReloadDialog';
 const styles = theme => ({
 	button: {
 		margin: theme.spacing.unit,
-		marginTop: '15px',
+		marginTop: '1vh',
 	},
 });
 
@@ -157,16 +153,17 @@ class App extends Component {
 			: this.getHighlightedText();
 
 		const textareaStyle = {
-			height: '430px',
-			padding: '5px',
+			height: '62vh',
+			padding: '1vh',
 			textAlign: 'left',
-			width: '100%',
-			margin: 10,
-			overflowX: 'scroll',
+			width: '87%',
+			margin: 'auto',
+			marginBottom: '1vh',
+			overflowX: 'auto',
 			border: '1px solid rgb(169, 169, 169)',
 		};
 		return (
-			<div className="App" style={{ margin: '2px', marginTop: '0px' }}>
+			<div className="App">
 				<Header handleChange={this.handleChange} />
 				<Settings
 					open={isSettingsOpen}
@@ -177,22 +174,11 @@ class App extends Component {
 				/>
 				{isEditable ? (
 					<React.Fragment>
-						<SplitEditor
-							mode="javascript"
-							theme="github"
-							splits={2}
-							height="400px"
-							width="95%"
-							showGutter={false}
-							showPrintMargin={false}
-							style={{ margin: '10px auto', padding: 20, border: '1px solid #efefef' }}
-							orientation={window.innerWidth <= 768 ? 'below' : 'beside'}
-							value={[originalTextLeft, originalTextRight]}
-							name="Split_Editor"
-							onChange={this.handleEditor}
-							editorProps={{ $blockScrolling: true }}
-							fontSize={14}
-						/>
+						<div>
+							<Editor floatLR="left" handleChange={this.handleChange} originalText={originalTextLeft} />
+							<Editor floatLR="right" handleChange={this.handleChange} originalText={originalTextRight} />
+							<div style={{ clear: 'both' }} />
+						</div>
 						<Button
 							variant="contained"
 							color="secondary"
