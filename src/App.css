@@ -1,6 +1,7 @@
 .App {
 	text-align: center;
-	background-color: #ededed;
+	background-color: #e8e8e8;
+	overflow-x: hidden;
 }
 .Highlight {
 	background-color: greenyellow;

@@ -3,6 +3,7 @@ import './App.css';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import Editor from './Editor';
 import Header from './Header';
 import Settings from './Settings';
@@ -174,11 +175,14 @@ class App extends Component {
 				/>
 				{isEditable ? (
 					<React.Fragment>
-						<div>
-							<Editor floatLR="left" handleChange={this.handleChange} originalText={originalTextLeft} />
-							<Editor floatLR="right" handleChange={this.handleChange} originalText={originalTextRight} />
-							<div style={{ clear: 'both' }} />
-						</div>
+						<Grid container spacing={8}>
+							<Grid item xs={12} sm={6}>
+								<Editor floatLR="left" handleChange={this.handleChange} originalText={originalTextLeft} />
+							</Grid>
+							<Grid item xs={12} sm={6}>
+								<Editor floatLR="right" handleChange={this.handleChange} originalText={originalTextRight} />
+							</Grid>
+						</Grid>
 						<Button
 							variant="contained"
 							color="secondary"

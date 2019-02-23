@@ -23,14 +23,24 @@ const Editor = props => {
 		);
 	}
 	return (
-		<div style={{ height: '62vh', width: '49.1%', margin: '0.35%', overflow: 'auto', float: floatLR, backgroundColor: '#ffffff' }}>
-			<div className="minHeight" style={{ width: '5%', float: 'left', overflowX: 'hidden' }}>
+		<div style={{ height: '62vh', overflow: 'auto', backgroundColor: '#ffffff' }}>
+			<div
+				className="minHeight"
+				style={{
+					width: '11%',
+					float: 'left',
+					overflowX: 'hidden',
+					background: '#fafafa',
+					borderRight: '1px solid #e8e8e8',
+					boxSizing: 'border-box',
+				}}
+			>
 				{listItems}
 			</div>
 			<div
 				placeholder="Please enter some text to compare!"
 				className="minHeight noOutline"
-				style={{ width: '95%', float: 'left', textAlign: 'left', overflowX: 'auto' }}
+				style={{ width: '89%', float: 'left', textAlign: 'left', overflowX: 'auto' }}
 				onInput={event => handleChange(floatLR === 'left' ? 'originalTextLeft' : 'originalTextRight', event.target.innerText)}
 				contentEditable="true"
 			/>
