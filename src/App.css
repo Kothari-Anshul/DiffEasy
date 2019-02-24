@@ -1,5 +1,7 @@
 .App {
 	text-align: center;
+	background-color: #e8e8e8;
+	overflow-x: hidden;
 }
 .Highlight {
 	background-color: greenyellow;
@@ -31,4 +33,26 @@
 	to {
 		transform: rotate(360deg);
 	}
+}
+[contentEditable='true']:empty:not(:focus):before {
+	content: attr(placeholder);
+}
+.noOutline:focus {
+	outline: none;
+}
+.minHeight {
+	min-height: 60vh;
+}
+.numbers {
+	color: #999;
+}
+.noOutline {
+	white-space: nowrap;
+}
+[class*='MuiInput-underline-']:after,
+[class*='MuiInput-underline-']:before {
+	border-bottom: none !important;
+}
+.noScroll::-webkit-scrollbar {
+	display: none;
 }

@@ -12,6 +12,7 @@ import Save from '@material-ui/icons/Save';
 const styles = {
 	root: {
 		flexGrow: 1,
+		marginBottom: '1vh',
 	},
 	grow: {
 		flexGrow: 1,
@@ -30,7 +31,7 @@ const Header = props => {
 			<AppBar position="static">
 				<Toolbar>
 					<Typography variant="h6" color="inherit" className={classes.grow}>
-						DIFFERENCE MADE EASY
+						DIFF MADE EASY
 					</Typography>
 					<IconButton color="inherit" onClick={() => props.handleChange('isReloadDialogOpen', true)}>
 						<FolderOpen />

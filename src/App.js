@@ -3,11 +3,8 @@ import './App.css';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { split as SplitEditor } from 'react-ace';
-
-import 'brace/mode/javascript';
-import 'brace/theme/github';
-
+import Grid from '@material-ui/core/Grid';
+import Editor from './Editor';
 import Header from './Header';
 import Settings from './Settings';
 import Footer from './Footer';
@@ -17,7 +14,7 @@ import ReloadDialog from './ReloadDialog';
 const styles = theme => ({
 	button: {
 		margin: theme.spacing.unit,
-		marginTop: '15px',
+		marginTop: '1vh',
 	},
 });
 
@@ -155,18 +152,8 @@ class App extends Component {
 					highlightedTextRight: '',
 			  }
 			: this.getHighlightedText();
-
-		const textareaStyle = {
-			height: '430px',
-			padding: '5px',
-			textAlign: 'left',
-			width: '100%',
-			margin: 10,
-			overflowX: 'scroll',
-			border: '1px solid rgb(169, 169, 169)',
-		};
 		return (
-			<div className="App" style={{ margin: '2px', marginTop: '0px' }}>
+			<div className="App">
 				<Header handleChange={this.handleChange} />
 				<Settings
 					open={isSettingsOpen}
@@ -175,24 +162,28 @@ class App extends Component {
 					isCompareByLetter={isCompareByLetter}
 					highlightColor={highlightColor}
 				/>
+				<Grid container spacing={8} style={{ padding: '10px' }}>
+					<Grid item xs={12} sm={6}>
+						<Editor
+							isEditable={isEditable}
+							highlightedText={highlightedTextLeft}
+							floatLR="left"
+							handleChange={this.handleChange}
+							originalText={originalTextLeft}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<Editor
+							isEditable={isEditable}
+							highlightedText={highlightedTextRight}
+							floatLR="right"
+							handleChange={this.handleChange}
+							originalText={originalTextRight}
+						/>
+					</Grid>
+				</Grid>
 				{isEditable ? (
 					<React.Fragment>
-						<SplitEditor
-							mode="javascript"
-							theme="github"
-							splits={2}
-							height="400px"
-							width="95%"
-							showGutter={false}
-							showPrintMargin={false}
-							style={{ margin: '10px auto', padding: 20, border: '1px solid #efefef' }}
-							orientation={window.innerWidth <= 768 ? 'below' : 'beside'}
-							value={[originalTextLeft, originalTextRight]}
-							name="Split_Editor"
-							onChange={this.handleEditor}
-							editorProps={{ $blockScrolling: true }}
-							fontSize={14}
-						/>
 						<Button
 							variant="contained"
 							color="secondary"
@@ -217,10 +208,6 @@ class App extends Component {
 					</React.Fragment>
 				) : (
 					<React.Fragment>
-						<div style={{ display: 'flex', flexDirection: window.innerWidth <= 768 ? 'column' : 'row' }}>
-							<div style={textareaStyle} dangerouslySetInnerHTML={{ __html: highlightedTextLeft }} />
-							<div style={textareaStyle} dangerouslySetInnerHTML={{ __html: highlightedTextRight }} />
-						</div>
 						<Button variant="contained" color="primary" className={classes.button} onClick={() => this.handleChange('isEditable', true)}>
 							Edit
 						</Button>
