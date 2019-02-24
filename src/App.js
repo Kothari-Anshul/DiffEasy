@@ -152,17 +152,6 @@ class App extends Component {
 					highlightedTextRight: '',
 			  }
 			: this.getHighlightedText();
-
-		const textareaStyle = {
-			height: '62vh',
-			padding: '1vh',
-			textAlign: 'left',
-			width: '87%',
-			margin: 'auto',
-			marginBottom: '1vh',
-			overflowX: 'auto',
-			border: '1px solid rgb(169, 169, 169)',
-		};
 		return (
 			<div className="App">
 				<Header handleChange={this.handleChange} />
@@ -173,16 +162,28 @@ class App extends Component {
 					isCompareByLetter={isCompareByLetter}
 					highlightColor={highlightColor}
 				/>
+				<Grid container spacing={8} style={{ padding: '10px' }}>
+					<Grid item xs={12} sm={6}>
+						<Editor
+							isEditable={isEditable}
+							highlightedText={highlightedTextLeft}
+							floatLR="left"
+							handleChange={this.handleChange}
+							originalText={originalTextLeft}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<Editor
+							isEditable={isEditable}
+							highlightedText={highlightedTextRight}
+							floatLR="right"
+							handleChange={this.handleChange}
+							originalText={originalTextRight}
+						/>
+					</Grid>
+				</Grid>
 				{isEditable ? (
 					<React.Fragment>
-						<Grid container spacing={8}>
-							<Grid item xs={12} sm={6}>
-								<Editor floatLR="left" handleChange={this.handleChange} originalText={originalTextLeft} />
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<Editor floatLR="right" handleChange={this.handleChange} originalText={originalTextRight} />
-							</Grid>
-						</Grid>
 						<Button
 							variant="contained"
 							color="secondary"
@@ -207,10 +208,6 @@ class App extends Component {
 					</React.Fragment>
 				) : (
 					<React.Fragment>
-						<div style={{ display: 'flex', flexDirection: window.innerWidth <= 768 ? 'column' : 'row' }}>
-							<div style={textareaStyle} dangerouslySetInnerHTML={{ __html: highlightedTextLeft }} />
-							<div style={textareaStyle} dangerouslySetInnerHTML={{ __html: highlightedTextRight }} />
-						</div>
 						<Button variant="contained" color="primary" className={classes.button} onClick={() => this.handleChange('isEditable', true)}>
 							Edit
 						</Button>

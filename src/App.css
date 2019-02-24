@@ -41,11 +41,18 @@
 	outline: none;
 }
 .minHeight {
-	min-height: 62vh;
+	min-height: 60vh;
 }
 .numbers {
 	color: #999;
 }
 .noOutline {
 	white-space: nowrap;
+}
+[class*='MuiInput-underline-']:after,
+[class*='MuiInput-underline-']:before {
+	border-bottom: none !important;
+}
+.noScroll::-webkit-scrollbar {
+	display: none;
 }

@@ -1,27 +1,37 @@
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
 
-const currentCount = 20;
+const minNoOfLines = 20;
 const getNoOfLines = str => {
-	const modifiedStr = str.replace(/\n\n/g, '\n');
 	let newCount = 0;
-	for (let i = 0; i < modifiedStr.length; i++) {
-		if (modifiedStr[i] === '\n') {
+	for (let i = 0; i < str.length; i++) {
+		if (str[i] === '\n') {
 			newCount++;
 		}
 	}
-	return newCount + 1 > currentCount ? newCount + 1 : currentCount;
+	return newCount + 1 > minNoOfLines ? newCount + 1 : minNoOfLines;
 };
 
 const Editor = props => {
-	const { handleChange, floatLR } = props;
+	const { handleChange, floatLR, isEditable, highlightedText, originalText } = props;
 	const listItems = [];
-	for (let i = 0; i < getNoOfLines(props.originalText); i++) {
+	const noOfLines = getNoOfLines(originalText);
+	for (let i = 0; i < noOfLines; i++) {
 		listItems.push(
 			<div className="numbers" key={i}>
 				{i + 1}
 			</div>,
 		);
 	}
+	const textareaStyle = {
+		width: '88%',
+		float: 'left',
+		textAlign: 'left',
+		padding: '0px',
+		border: 'none',
+		boxSizing: 'border-box',
+		resize: 'none',
+	};
 	return (
 		<div style={{ height: '62vh', overflow: 'auto', backgroundColor: '#ffffff' }}>
 			<div
@@ -33,17 +43,24 @@ const Editor = props => {
 					background: '#fafafa',
 					borderRight: '1px solid #e8e8e8',
 					boxSizing: 'border-box',
+					paddingTop: '6px',
 				}}
 			>
 				{listItems}
 			</div>
-			<div
-				placeholder="Please enter some text to compare!"
-				className="minHeight noOutline"
-				style={{ width: '89%', float: 'left', textAlign: 'left', overflowX: 'auto' }}
-				onInput={event => handleChange(floatLR === 'left' ? 'originalTextLeft' : 'originalTextRight', event.target.innerText)}
-				contentEditable="true"
-			/>
+			{isEditable ? (
+				<TextField
+					inputProps={{ className: 'minHeight noOutline noScroll' }}
+					placeholder="Please enter some text to compare!"
+					multiline
+					onChange={event => handleChange(floatLR === 'left' ? 'originalTextLeft' : 'originalTextRight', event.target.value)}
+					style={textareaStyle}
+					value={originalText}
+				/>
+			) : (
+				<div className="minHeight noOutline" style={textareaStyle} dangerouslySetInnerHTML={{ __html: highlightedText }} />
+			)}
+
 			<div style={{ clear: 'both' }} />
 		</div>
 	);
