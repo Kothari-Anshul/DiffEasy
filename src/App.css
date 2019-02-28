@@ -49,8 +49,10 @@
 .noOutline {
 	white-space: nowrap;
 }
-[class*='MuiInput-underline-']:after,
-[class*='MuiInput-underline-']:before {
+[class*='MuiInput-underline-221']:after,
+[class*='MuiInput-underline-221']:before,
+[class*='jss221']:after,
+[class*='jss221']:before {
 	border-bottom: none !important;
 }
 .noScroll::-webkit-scrollbar {
