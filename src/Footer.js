@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
 	return (
-		<div style={{ marginTop: '8vh', padding: '0.5vh' }}>
+		<div style={{ marginTop: '10.4vh' }}>
 			<p>
 				Copyright &copy; 2019{' '}
 				<a href="https://github.com/Kothari-Anshul" target="_blank" rel="noopener noreferrer">
